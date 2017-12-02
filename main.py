@@ -3,8 +3,8 @@ from Small_world import generate_small_world_problem
 
 
 def run_task_1():
-    n = 40
-    p = 0.1
+    n = 100
+    p = 0.3
     print("Running Erdos-Renyi random graph")
     print("%d nodes with connection probability %1.2f" % (n, p))
     plot_erdos_renyi_graph(n, p)
@@ -26,4 +26,4 @@ def main(task_nbr):
         run_task_2()
 
 if __name__ == '__main__':
-    main(1)
+    main(2)
