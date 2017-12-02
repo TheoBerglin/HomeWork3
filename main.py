@@ -1,8 +1,7 @@
 from Erdos_graph import plot_erdos_renyi_graph
 from Small_world import generate_small_world_problem, create_small_world_edges
 from The_growth_model import plot_growth_model
-from Graph_Calculator import calculate_clustering_coefficient_from_edges, clustering_coefficient_exact, \
-    calculate_clustering_coefficient
+from Graph_Calculator import *
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -75,6 +74,11 @@ def run_task_4():
     plt.title('smallWorldExample.txt Cluster coefficient: %2.6f' % coefficient)
     plt.show()
 
+def run_task_5():
+    print('Calculating length of smallWorldExample.txt')
+    graph = np.loadtxt('DataFiles/smallWorldExample.txt')
+    l = get_path_length(graph)
+    print('smallWorldExample.txt Path length: %2.5f' % l)
 
 def main(task_nbr):
     if task_nbr == 1:
@@ -85,7 +89,8 @@ def main(task_nbr):
         run_task_3()
     elif task_nbr == 4:
         run_task_4()
-
+    elif task_nbr == 5:
+        run_task_5()
 
 if __name__ == '__main__':
-    main(1)
+    main(5)
