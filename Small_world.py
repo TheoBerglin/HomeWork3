@@ -21,13 +21,20 @@ def add_shortcuts(edges, n_nodes, p):
             row = np.random.randint(0, n_nodes)
             col = np.random.randint(0, n_nodes)
             new_edges.append((row, col))
+    if len(new_edges) > 0:
+        return np.append(edges, np.asarray(new_edges), axis=0)
+    else:
+        return edges
 
-    return np.append(edges, np.asarray(new_edges), axis=0)
+
+def create_small_world_edges(n, c, p):
+    edges = create_nearest_neighbour_edges(n, c)
+    shortcut_edges = add_shortcuts(edges, n, p)
+    return edges, shortcut_edges
 
 
 def generate_small_world_problem(n, c, p):
-    edges = create_nearest_neighbour_edges(n, c)
-    shortcut_edges = add_shortcuts(edges, n, p)
+    edges, shortcut_edges = create_small_world_edges(n, c, p)
     graph = edges_to_graph(edges)
     shortcut_graph = edges_to_graph(shortcut_edges)
 
