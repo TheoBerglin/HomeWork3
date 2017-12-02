@@ -2,30 +2,29 @@ import numpy as np
 import networkx as Nx
 import matplotlib.pyplot as plt
 from scipy.special import binom
+from Graph_help import edges_to_graph
 
 
-def generate_positions(n, p):
-    graph = np.zeros([n, n])
-    for row in range(n):
-        for col in range(row, n):
-            if np.random.rand() < p:
-                graph[row, col] = 1
-                graph[col, row] = 1
-
-    return graph
+def generate_erdos_edges(n, p):
+    return np.asarray([(i, j) for i in range(n) for j in range(n) if np.random.rand() < p])
 
 
-def analyze_graph(graph):
-    x = np.zeros(graph.shape[0])
-    for col in range(graph.shape[0]):
-        x[int(np.sum(graph[:, col]))] += 1
-    return x
+def graph_distribution(edges):
+    n_nodes = len(np.unique(edges[:, 0]))
+    connections = np.zeros(n_nodes)
+    for node in edges:
+        connections[node[1]] += 1
+    distributions = np.zeros(n_nodes)
+    for c in connections:
+        distributions[int(c)] += 1
+    return distributions
 
 
 def plot_erdos_renyi_graph(n, p):
     # Graph data
-    graph = generate_positions(n, p)
-    graph_dist = analyze_graph(graph)
+    edges = generate_erdos_edges(n, p)
+    graph = edges_to_graph(edges)
+    graph_dist = graph_distribution(edges)
     # Plot data
     g2 = Nx.Graph(graph)
     x = [i for i in range(n)]
