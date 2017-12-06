@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from Graph_help import edges_to_graph
+from Graph_handling import edges_to_graph
 
 
 def create_nearest_neighbour_edges(n, c):
@@ -38,8 +38,8 @@ def generate_small_world_problem(n, c, p):
     graph = edges_to_graph(edges)
     shortcut_graph = edges_to_graph(shortcut_edges)
 
-    graph = nx.Graph(graph)
-    shortcut_graph = nx.Graph(shortcut_graph)
+    graph = nx.DiGraph(graph)
+    shortcut_graph = nx.DiGraph(shortcut_graph)
 
     # Plotting
     plt.subplot(1, 2, 1)
